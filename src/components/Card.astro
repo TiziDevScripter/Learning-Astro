@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date?: string;
+  image?: string;
+}
+const { title, description, date, image }: Props = Astro.props;
+---
+
+<div class="card">
+  {date && <p class="date">{date}</p>}
+  <h3 class="title">{title}</h3>
+  <p class="description">{description}</p>
+  {image && <img class="image" src={image} alt="image-post" />}
+</div>
+
+<style>
+  .card {
+    background-color: #f0f033;
+    color: #222;
+    padding: 1em;
+    font-family: system-ui, sans-serif;
+    margin: 1em 0;
+  }
+  .card .title {
+    margin: 0;
+    margin-bottom: 0.7em;
+    font-size: 1.5em;
+  }
+  .card .description {
+    margin: 0;
+    font-size: 1.1em;
+  }
+  .card .date {
+    font-size: 0.9em;
+  }
+  .card .image {
+    display: block;
+    margin-top: 0.6em;
+  }
+</style>

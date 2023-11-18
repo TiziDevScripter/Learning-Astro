@@ -1,0 +1,40 @@
+---
+import Card from "../components/Card.astro";
+import Layout from "../components/Layout.astro";
+const res = await fetch("https://jsonplaceholder.org/posts");
+const posts = await res.json();
+---
+
+<Layout titlePage="Posts">
+  <h1 class="text-4xl mt-8 mb-4">Posts</h1>
+  <ul>
+    {
+      posts.map((post) => {
+        const postDate = post.publishedAt.split(" ");
+        return (
+          <Card
+            title={post.title}
+            description={post.content}
+            date={postDate}
+            image={post.thumbnail}
+          />
+          // <li>
+          //   <p>Post number: {post.id}</p>
+          //   <p>
+          //     Published in {postDate[0]} at {postDate[1]} hs
+          //   </p>
+          //   <p>{post.slug}</p>
+          //   <h3>{post.title}</h3>
+          //   <p>{post.content}</p>
+          //   <img src={post.thumbnail} alt="photo" />
+          // </li>
+        );
+      })
+    }
+  </ul>
+  <style>
+    ul {
+      padding: 0;
+    }
+  </style>
+</Layout>

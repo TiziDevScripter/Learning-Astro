@@ -1,0 +1,81 @@
+---
+interface Props {
+  titlePage?: string;
+}
+type Links = Array<[string, string]>;
+
+const { titlePage = "Astro website" }: Props = Astro.props;
+
+const links: Links = [
+  ["Homepage", "/"],
+  ["Posts", "/posts"],
+  ["Support", "/support"],
+  ["WhoWeAre", "/whoweare"],
+  ["Blog", "/blog"],
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{titlePage}</title>
+  </head>
+  <body>
+    <header class="header padding-x max-container">
+      <nav class="header__nav">
+        <ul>
+          {
+            links &&
+              links.map((link) => (
+                <li>
+                  <a href={link[1]}>{link[0]}</a>
+                </li>
+              ))
+          }
+        </ul>
+      </nav>
+    </header>
+    <main class="max-container padding-x">
+      <slot />
+    </main>
+
+    <style>
+      body {
+        background-color: #002;
+        color: #77f;
+        font-family: system-ui, sans-serif;
+        margin: 0;
+      }
+      .padding-x {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+      .max-container {
+        max-width: 1440px;
+        margin: 0 auto;
+      }
+      .header {
+      }
+      .header__nav {
+      }
+      .header__nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1em;
+        justify-content: space-between;
+        padding: 0;
+      }
+      .header__nav li {
+      }
+      .header__nav a {
+        text-decoration: none;
+        color: #fff;
+        text-shadow: 0 0 2px #000;
+        font-family: monospace;
+        font-size: 1.4em;
+      }
+    </style>
+  </body>
+</html>

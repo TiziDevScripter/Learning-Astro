@@ -1,0 +1,59 @@
+---
+import Layout from "../../components/Layout.astro";
+import bgImage from "../../images/bg.jpg?url";
+
+const posts = await Astro.glob("./posts/*.md");
+---
+
+<Layout>
+  <h1 class="text-4xl mt-8 mb-4">
+    <span class="yellow">DigiTech Astro Website</span>
+    <span class="green">Blog</span>
+  </h1>
+  <p>
+    This is a <span class="green">blog</span> post about <span class="yellow"
+      >DigiTech Astro website</span
+    >.
+  </p>
+  <ul>
+    Discover blogs here below <br />
+    {
+      posts &&
+        posts.map((post) => (
+          <li>
+            <a class="red" href={post.url}>
+              {post.frontmatter.title}
+            </a>
+          </li>
+        ))
+    }
+  </ul>
+  <img src={bgImage} alt="bg-image" width="1000" />
+  <style>
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      flex-wrap: wrap;
+      padding: 0;
+      margin-top: 2em;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+      text-shadow: 0 0 2px #000;
+      font-family: monospace;
+      font-size: 1.4em;
+    }
+    .yellow {
+      color: #ff3;
+    }
+    .green {
+      color: #3f3;
+    }
+    .red {
+      color: #f33;
+    }
+  </style>
+</Layout>
